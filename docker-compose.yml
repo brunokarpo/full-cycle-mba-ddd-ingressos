@@ -1,0 +1,25 @@
+services:
+  database:
+    image: postgres:17.4-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: ingressos-db
+      POSTGRES_USER: ingressos-app
+      POSTGRES_PASSWORD: ingressos-app
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: "pg_isready -q -U ingressos-app"
+      interval: 5s
+      timeout: 1s
+      retries: 2
+
+  flyway:
+    image: flyway/flyway:11.8.1-alpine
+    command: ["-configFiles=/flyway/conf/flyway.conf", "migrate"]
+    volumes:
+      - ./scripts/db/migrations:/flyway/sql
+      - ./scripts/db/conf:/flyway/conf
+    depends_on:
+      database:
+        condition: service_healthy
