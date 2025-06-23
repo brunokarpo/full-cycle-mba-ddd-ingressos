@@ -10,18 +10,18 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class PartnerServiceTest {
+class CreatePartnerUseCaseTest {
 
 	private lateinit var partnerRepository: PartnerRepository
 
-	private lateinit var sut: PartnerService
+	private lateinit var sut: CreatePartnerUseCase
 
 
 	@BeforeEach
 	fun setUp() {
 		partnerRepository = mockk(relaxed = true)
 
-		sut = PartnerService(partnerRepository)
+		sut = CreatePartnerUseCase(partnerRepository)
 	}
 
 	@Test
