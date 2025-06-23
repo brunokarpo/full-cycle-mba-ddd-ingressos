@@ -32,6 +32,8 @@ class PartnerServiceTest {
 		val partner = sut.createPartner(name, cnpj)
 
 		assertNotNull(partner)
+		assertEquals(name, partner.name)
+		assertEquals(cnpj, partner.cnpj)
 
 		val slot = slot<Partner>()
 
