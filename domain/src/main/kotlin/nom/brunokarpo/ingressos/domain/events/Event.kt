@@ -9,4 +9,8 @@ interface Event : Aggregate {
 	val description: String
 	val date: ZonedDateTime
 	val partnerId: UUID
+
+	fun addSection(sectionName: String, numberOfSpots: Int)
+
+	fun getSections(): Set<Section>
 }

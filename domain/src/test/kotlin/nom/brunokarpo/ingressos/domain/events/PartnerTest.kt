@@ -1,4 +1,4 @@
-package nom.brunokarpo.ingressos.domain.events.impl
+package nom.brunokarpo.ingressos.domain.events
 
 import nom.brunokarpo.ingressos.domain.events.commands.CreateEventCommand
 import nom.brunokarpo.ingressos.domain.fixtures.PartnerFixture
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import java.time.ZonedDateTime
 
-class PartnerImplTest {
+class PartnerTest {
 
 	@Test
 	fun `should create an new event`() {
