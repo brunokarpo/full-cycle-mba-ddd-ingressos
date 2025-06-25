@@ -1,0 +1,1 @@
+insert into partner (id, name, cnpj) values ('8c4fc406-3e25-4ccd-af77-29ad47ae5e47', 'Test partner', '00000000000001')

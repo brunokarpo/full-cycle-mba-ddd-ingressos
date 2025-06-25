@@ -7,9 +7,12 @@ import java.util.UUID
 
 object PartnerFactory {
 
-	fun create(name: String, cnpj: String): Partner {
+	fun create(
+		id: UUID = UUID.randomUUID(),
+		name: String,
+		cnpj: String): Partner {
 		return PartnerImpl(
-			id = UUID.randomUUID(),
+			id = id,
 			name = name,
 			cnpj = Cnpj(cnpj)
 		)

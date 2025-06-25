@@ -1,0 +1,1 @@
+delete from partner where true;
