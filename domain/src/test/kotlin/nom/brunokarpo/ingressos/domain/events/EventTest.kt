@@ -19,4 +19,16 @@ class EventTest {
 
 		assertEquals(numberOfSpots, numberOfSpotsInSection)
 	}
+
+	@Test
+	fun `should add new section`() {
+		val event = EventFixture.create()
+		val sectionName = "Section 1"
+		val numberOfSpots = 100
+
+		event.addSection(sectionName, numberOfSpots)
+
+		assertEquals(1, event.sections.size)
+		assertEquals(sectionName, event.sections.first().name)
+	}
 }

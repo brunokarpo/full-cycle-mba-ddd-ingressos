@@ -3,6 +3,7 @@ package nom.brunokarpo.ingressos.domain.events.impl
 import nom.brunokarpo.ingressos.domain.events.Event
 import nom.brunokarpo.ingressos.domain.events.Section
 import nom.brunokarpo.ingressos.domain.events.factories.SectionFactory
+import nom.brunokarpo.ingressos.domain.events.values.SectionValue
 import java.time.ZonedDateTime
 import java.util.UUID
 
@@ -14,15 +15,20 @@ internal class EventImpl(
 	override val id: UUID
 ) : Event{
 
-	private val sections = mutableListOf<Section>()
+	override val sections: Set<SectionValue>
+		get() {
+			return mutableSections.map { section -> SectionValue(section) }.toSet()
+		}
+
+	private val mutableSections = mutableListOf<Section>()
 
 	override fun addSection(sectionName: String, numberOfSpots: Int) {
 		val section = SectionFactory.create(name = sectionName)
 		section.addSpots(numberOfSpots)
-		sections.add(section)
+		mutableSections.add(section)
 	}
 
 	override fun getNumberOfSpotsInSection(sectionName: String): Int {
-		return sections.first { section -> section.name == sectionName }.getNumberOfSpots()
+		return mutableSections.first { section -> section.name == sectionName }.getNumberOfSpots()
 	}
 }
