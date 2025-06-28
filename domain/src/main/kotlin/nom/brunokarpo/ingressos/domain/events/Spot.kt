@@ -6,4 +6,10 @@ import java.util.UUID
 internal class Spot(
 	override val id: UUID,
 	val location: String
-) : Entity
+) : Entity {
+	companion object {
+		fun create(id: UUID = UUID.randomUUID(), locationName: String): Spot {
+			return Spot(id, locationName)
+		}
+	}
+}

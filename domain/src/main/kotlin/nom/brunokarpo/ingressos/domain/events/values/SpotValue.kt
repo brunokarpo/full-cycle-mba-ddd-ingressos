@@ -2,7 +2,6 @@ package nom.brunokarpo.ingressos.domain.events.values
 
 import nom.brunokarpo.ingressos.domain.common.valueobjects.EntityAsValue
 import nom.brunokarpo.ingressos.domain.events.Spot
-import nom.brunokarpo.ingressos.domain.events.factories.SpotFactory
 import java.util.UUID
 
 class SpotValue (
@@ -10,7 +9,7 @@ class SpotValue (
 	val location: String
 ): EntityAsValue() {
 	internal fun asEntity(): Spot {
-		return SpotFactory.create(
+		return Spot.create(
 			id = id,
 			locationName = location
 		)

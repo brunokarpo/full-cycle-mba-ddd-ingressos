@@ -2,7 +2,6 @@ package nom.brunokarpo.ingressos.domain.events.values
 
 import nom.brunokarpo.ingressos.domain.common.valueobjects.EntityAsValue
 import nom.brunokarpo.ingressos.domain.events.Section
-import nom.brunokarpo.ingressos.domain.events.factories.SectionFactory
 import java.util.UUID
 
 class SectionValue(
@@ -18,7 +17,7 @@ class SectionValue(
 	)
 
 	internal fun asEntity(): Section {
-		return SectionFactory.create(
+		return Section.create(
 			id = id,
 			name = name
 		)

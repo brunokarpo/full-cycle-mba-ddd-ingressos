@@ -1,7 +1,6 @@
 package nom.brunokarpo.ingressos.domain.events
 
 import nom.brunokarpo.ingressos.domain.common.Entity
-import nom.brunokarpo.ingressos.domain.events.factories.SpotFactory
 import nom.brunokarpo.ingressos.domain.events.values.SpotValue
 import java.util.UUID
 
@@ -10,6 +9,12 @@ internal class Section(
 	val name: String,
 ) : Entity {
 
+	companion object {
+		fun create(id: UUID = UUID.randomUUID(), name: String): Section {
+			return Section(id, name)
+		}
+	}
+
 	private val mutableSpots = mutableSetOf<Spot>()
 
 	val spots: Set<SpotValue>
@@ -17,7 +22,7 @@ internal class Section(
 
 	fun addSpots(numberOfSpots: Int) {
 		(1..numberOfSpots).forEach { i ->
-			mutableSpots.add(SpotFactory.create(locationName = (mutableSpots.size + 1).toString()))
+			mutableSpots.add(Spot.create(locationName = (mutableSpots.size + 1).toString()))
 		}
 	}
 

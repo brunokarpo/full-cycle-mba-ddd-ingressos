@@ -3,7 +3,6 @@ package nom.brunokarpo.ingressos.domain.events
 import nom.brunokarpo.ingressos.domain.common.AggregateRoot
 import nom.brunokarpo.ingressos.domain.events.commands.CreateEventCommand
 import nom.brunokarpo.ingressos.domain.events.domainevents.EventCreated
-import nom.brunokarpo.ingressos.domain.events.factories.SectionFactory
 import nom.brunokarpo.ingressos.domain.events.values.SectionValue
 import java.time.ZonedDateTime
 import java.util.UUID
@@ -44,7 +43,7 @@ class Event(
 		get() = mutableSections.map { section -> SectionValue(section) }.toSet()
 
 	fun addSection(sectionName: String, numberOfSpots: Int) {
-		val section = SectionFactory.create(name = sectionName)
+		val section = Section.create(name = sectionName)
 		section.addSpots(numberOfSpots)
 		mutableSections.add(section)
 	}
