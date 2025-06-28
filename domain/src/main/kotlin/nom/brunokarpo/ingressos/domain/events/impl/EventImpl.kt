@@ -18,10 +18,15 @@ internal class EventImpl(
 
 	override fun addSection(sectionName: String, numberOfSpots: Int) {
 		val section = SectionFactory.create(name = sectionName)
+		section.addSpots(numberOfSpots)
 		sections.add(section)
 	}
 
 	override fun getSections(): Set<Section> {
 		return sections.toSet()
+	}
+
+	override fun getNumberOfSpotsInSection(sectionName: String): Int {
+		return sections.first { section -> section.name == sectionName }.getNumberOfSpots()
 	}
 }
