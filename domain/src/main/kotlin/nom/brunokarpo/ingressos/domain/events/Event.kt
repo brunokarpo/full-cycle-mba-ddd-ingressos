@@ -1,11 +1,11 @@
 package nom.brunokarpo.ingressos.domain.events
 
-import nom.brunokarpo.ingressos.domain.common.Aggregate
+import nom.brunokarpo.ingressos.domain.common.AggregateRoot
 import nom.brunokarpo.ingressos.domain.events.values.SectionValue
 import java.time.ZonedDateTime
 import java.util.UUID
 
-interface Event : Aggregate {
+interface Event : AggregateRoot {
 	val name: String
 	val description: String
 	val date: ZonedDateTime

@@ -1,5 +1,5 @@
 package nom.brunokarpo.ingressos.application.commons
 
-import nom.brunokarpo.ingressos.domain.common.Aggregate
+import nom.brunokarpo.ingressos.domain.common.AggregateRoot
 
-interface UseCase<A : Aggregate>
+interface UseCase<A : AggregateRoot>
