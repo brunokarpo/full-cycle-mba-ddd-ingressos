@@ -6,9 +6,12 @@ import java.util.UUID
 
 internal object SpotFactory {
 
-	fun create(locationName: String): Spot {
+	fun create(
+		id: UUID = UUID.randomUUID(),
+		locationName: String
+	): Spot {
 		return SpotImpl(
-			id = UUID.randomUUID(),
+			id = id,
 			location = locationName
 		)
 	}

@@ -12,6 +12,6 @@ class SectionTest {
 
 		section.addSpots(10)
 
-		assertEquals(10, section.getNumberOfSpots())
+		assertEquals(10, section.spots.size)
 	}
 }
