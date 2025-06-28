@@ -1,4 +1,4 @@
-create table if not exists event (
+create table if not exists events (
     id uuid primary key default gen_random_uuid(),
     name text not null,
     description text,
@@ -8,18 +8,18 @@ create table if not exists event (
     updated_at timestamptz not null default now()
 );
 
-create table if not exists section (
+create table if not exists sections (
     id uuid primary key default gen_random_uuid(),
     name text not null,
-    event_id uuid not null references event(id) on delete cascade,
+    event_id uuid not null references events(id) on delete cascade,
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now()
 );
 
-create table if not exists spot (
+create table if not exists spots (
     id uuid primary key default gen_random_uuid(),
     location text not null,
-    section_id uuid not null references section(id) on delete cascade,
+    section_id uuid not null references sections(id) on delete cascade,
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now()
 )
