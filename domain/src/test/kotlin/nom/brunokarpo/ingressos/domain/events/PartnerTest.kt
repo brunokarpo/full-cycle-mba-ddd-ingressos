@@ -47,7 +47,6 @@ class PartnerTest {
 			assertEquals(partnerName, event.name)
 			assertEquals(partnerCnpj, event.cnpj)
 			assertEquals(1, event.version)
-			assertEquals(ZonedDateTime.now(), event.occurredOn)
 		}
 	}
 }
