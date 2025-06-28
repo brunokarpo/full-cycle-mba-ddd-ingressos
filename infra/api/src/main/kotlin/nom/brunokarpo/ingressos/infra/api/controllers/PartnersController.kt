@@ -2,8 +2,8 @@ package nom.brunokarpo.ingressos.infra.api.controllers
 
 import nom.brunokarpo.ingressos.application.dto.EventDTO
 import nom.brunokarpo.ingressos.application.dto.PartnerDTO
-import nom.brunokarpo.ingressos.application.events.CreateNewEventUseCase
-import nom.brunokarpo.ingressos.application.events.CreatePartnerUseCase
+import nom.brunokarpo.ingressos.application.usecases.CreateNewEventUseCase
+import nom.brunokarpo.ingressos.application.usecases.CreatePartnerUseCase
 import nom.brunokarpo.ingressos.infra.api.PartnersRouter
 import nom.brunokarpo.ingressos.infra.api.dto.CreateEventDto
 import nom.brunokarpo.ingressos.infra.api.dto.CreatePartnerDto

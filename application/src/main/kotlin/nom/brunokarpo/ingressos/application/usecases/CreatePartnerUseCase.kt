@@ -1,4 +1,4 @@
-package nom.brunokarpo.ingressos.application.events
+package nom.brunokarpo.ingressos.application.usecases
 
 import nom.brunokarpo.ingressos.application.dto.PartnerDTO
 import nom.brunokarpo.ingressos.domain.events.Partner

@@ -1,4 +1,4 @@
-package nom.brunokarpo.ingressos.application.events.exceptions
+package nom.brunokarpo.ingressos.application.usecases.exceptions
 
 import java.util.UUID
 

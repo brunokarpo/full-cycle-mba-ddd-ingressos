@@ -1,4 +1,4 @@
-package nom.brunokarpo.ingressos.application.events
+package nom.brunokarpo.ingressos.application.usecases
 
 import io.mockk.mockk
 import io.mockk.slot

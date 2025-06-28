@@ -1,6 +1,6 @@
 package nom.brunokarpo.ingressos.infra.api.controllers
 
-import nom.brunokarpo.ingressos.application.events.AddSectionInEventUseCase
+import nom.brunokarpo.ingressos.application.usecases.AddSectionInEventUseCase
 import nom.brunokarpo.ingressos.infra.api.EventsRouter
 import nom.brunokarpo.ingressos.infra.api.dto.AddEventSectiontDto
 import org.springframework.http.ResponseEntity

@@ -1,7 +1,7 @@
-package nom.brunokarpo.ingressos.application.events
+package nom.brunokarpo.ingressos.application.usecases
 
 import nom.brunokarpo.ingressos.application.dto.EventDTO
-import nom.brunokarpo.ingressos.application.events.exceptions.PartnerDoesNotExistsException
+import nom.brunokarpo.ingressos.application.usecases.exceptions.PartnerDoesNotExistsException
 import nom.brunokarpo.ingressos.domain.events.commands.CreateEventCommand
 import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
 import nom.brunokarpo.ingressos.domain.events.repository.PartnerRepository

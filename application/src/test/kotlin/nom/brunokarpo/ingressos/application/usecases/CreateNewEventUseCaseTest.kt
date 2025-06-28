@@ -1,17 +1,15 @@
-package nom.brunokarpo.ingressos.application.events
+package nom.brunokarpo.ingressos.application.usecases
 
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import nom.brunokarpo.ingressos.application.dto.EventDTO
-import nom.brunokarpo.ingressos.application.events.exceptions.PartnerDoesNotExistsException
+import nom.brunokarpo.ingressos.application.usecases.exceptions.PartnerDoesNotExistsException
 import nom.brunokarpo.ingressos.domain.events.Event
 import nom.brunokarpo.ingressos.domain.events.Partner
 import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
 import nom.brunokarpo.ingressos.domain.events.repository.PartnerRepository
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
-import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
