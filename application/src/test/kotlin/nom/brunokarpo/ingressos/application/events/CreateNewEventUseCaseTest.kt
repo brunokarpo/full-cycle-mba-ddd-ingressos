@@ -7,6 +7,7 @@ import nom.brunokarpo.ingressos.application.dto.EventDTO
 import nom.brunokarpo.ingressos.application.events.exceptions.PartnerDoesNotExistsException
 import nom.brunokarpo.ingressos.domain.events.Event
 import nom.brunokarpo.ingressos.domain.events.Partner
+import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
 import nom.brunokarpo.ingressos.domain.events.repository.PartnerRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -30,6 +31,7 @@ class CreateNewEventUseCaseTest {
 	private lateinit var event: Event
 
 	private lateinit var partnerRepository: PartnerRepository
+	private lateinit var eventRepository: EventRepository
 
 	private lateinit var sut: CreateNewEventUseCase
 	private lateinit var partner: Partner
@@ -50,8 +52,9 @@ class CreateNewEventUseCaseTest {
 		partnerRepository = mockk(relaxed = true) {
 			every { ofId(any()) } returns partner
 		}
+		eventRepository = mockk(relaxed = true) {}
 
-		sut = CreateNewEventUseCase(partnerRepository)
+		sut = CreateNewEventUseCase(partnerRepository, eventRepository)
 	}
 
 	@Test
@@ -82,6 +85,12 @@ class CreateNewEventUseCaseTest {
 		}
 
 		verify(exactly = 0) { partner.createEvent(any()) }
+	}
 
+	@Test
+	fun `should save the new event created`() {
+		sut.execute(PARTNER_ID, EVENT_NAME, EVENT_DESCRIPTION, EVENT_DATE)
+
+		verify { eventRepository.save(event) }
 	}
 }

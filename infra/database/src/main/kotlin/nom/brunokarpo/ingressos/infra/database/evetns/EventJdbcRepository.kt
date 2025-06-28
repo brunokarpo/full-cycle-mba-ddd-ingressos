@@ -22,6 +22,7 @@ class EventJdbcRepository(
 		val sql = """
 				INSERT INTO events (id, name, description, date, partner_id)
 				VALUES (:uuid, :name, :description, :date, :partnerId)
+				ON CONFLICT (id) DO UPDATE SET name = :name, description = :description, date = :date, partner_id = :partnerId, updated_at = now()
 			""".trimIndent()
 		val params = mapOf(
 			"uuid" to event.id,
@@ -47,6 +48,7 @@ class EventJdbcRepository(
 		val sql = """
 			INSERT INTO sections (id, name, event_id)
 			VALUES (:uuid, :name, :eventId)
+			ON CONFLICT (id) DO UPDATE SET name = :name, event_id = :eventId, updated_at = now()
 		""".trimIndent()
 		val params = mapOf(
 			"uuid" to section.id,
@@ -67,6 +69,7 @@ class EventJdbcRepository(
 		val sql = """
 			INSERT INTO spots (id, location, section_id)
 			VALUES (:uuid, :location, :sectionId)
+			ON CONFLICT (id) DO UPDATE SET location = :location, section_id = :sectionId, updated_at = now()
 		""".trimIndent()
 		val params = mapOf(
 			"uuid" to spot.id,

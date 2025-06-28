@@ -1,0 +1,10 @@
+### POST add section on event
+POST localhost:8080/api/v1/events/29f39ae0-462f-4dc9-8849-164a1d75ac2d/sections
+Content-Type: application/json
+
+{
+  "name": "VIP",
+  "numberOfSpots": 150
+}
+
+###

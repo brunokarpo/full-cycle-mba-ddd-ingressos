@@ -18,8 +18,9 @@ class ApplicationConfiguration {
 
 	@Bean
 	fun createNewEventUseCase(
-		partnerRepository: PartnerRepository
-	) = CreateNewEventUseCase(partnerRepository)
+		partnerRepository: PartnerRepository,
+		eventRepository: EventRepository
+	) = CreateNewEventUseCase(partnerRepository, eventRepository)
 
 	@Bean
 	fun addSectionInEventUseCase(
