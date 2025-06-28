@@ -1,7 +1,6 @@
 package nom.brunokarpo.ingressos.infra.database.evetns
 
 import nom.brunokarpo.ingressos.domain.events.Event
-import nom.brunokarpo.ingressos.domain.events.factories.EventFactory
 import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
 import nom.brunokarpo.ingressos.domain.events.values.SectionValue
 import nom.brunokarpo.ingressos.domain.events.values.SpotValue
@@ -94,7 +93,7 @@ class EventJdbcRepository(
 		""".trimIndent()
 		val params = mapOf("id" to eventId)
 		return jdbcTemplate.query(sql, params) { rs, _ ->
-			EventFactory.create(
+			Event.create(
 				id = rs.getString("id").let { UUID.fromString(it) },
 				name = rs.getString("name"),
 				description = rs.getString("description"),

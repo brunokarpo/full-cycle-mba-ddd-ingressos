@@ -1,7 +1,6 @@
 package nom.brunokarpo.ingressos.infra.database.events
 
 import nom.brunokarpo.ingressos.domain.events.Event
-import nom.brunokarpo.ingressos.domain.events.factories.EventFactory
 import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
 import nom.brunokarpo.ingressos.infra.database.DatabaseConfigurationTest
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -79,7 +78,7 @@ class EventJdbcRepositoryTest: DatabaseConfigurationTest() {
 		eventDate: ZonedDateTime = ZonedDateTime.now(),
 		eventPartnerId: UUID = UUID.randomUUID()
 	) : Event {
-		return EventFactory.create(
+		return Event.create(
 			id = eventId,
 			name = eventName,
 			description = eventDescription,

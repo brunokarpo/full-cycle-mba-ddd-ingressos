@@ -1,6 +1,8 @@
 package nom.brunokarpo.ingressos.domain.events
 
 import nom.brunokarpo.ingressos.domain.common.AggregateRoot
+import nom.brunokarpo.ingressos.domain.events.commands.CreateEventCommand
+import nom.brunokarpo.ingressos.domain.events.domainevents.EventCreated
 import nom.brunokarpo.ingressos.domain.events.factories.SectionFactory
 import nom.brunokarpo.ingressos.domain.events.values.SectionValue
 import java.time.ZonedDateTime
@@ -13,6 +15,29 @@ class Event(
 	val date: ZonedDateTime,
 	val partnerId: UUID,
 ) : AggregateRoot() {
+
+	companion object {
+		fun create(
+			id: UUID = UUID.randomUUID(),
+			name: String,
+			description: String,
+			date: ZonedDateTime,
+			partnerId: UUID
+		): Event {
+			val event = Event(id, name, description, date, partnerId)
+			event.recordEvent(EventCreated(event))
+			return event
+		}
+
+		fun create(createEventCommand: CreateEventCommand, partnerId: UUID): Event {
+			return create(
+				name = createEventCommand.name,
+				description = createEventCommand.description,
+				date = createEventCommand.date,
+				partnerId = partnerId
+			)
+		}
+	}
 
 	private val mutableSections = mutableListOf<Section>()
 	val sections: Set<SectionValue>

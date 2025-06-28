@@ -4,7 +4,6 @@ import nom.brunokarpo.ingressos.domain.common.AggregateRoot
 import nom.brunokarpo.ingressos.domain.common.valueobjects.Cnpj
 import nom.brunokarpo.ingressos.domain.events.commands.CreateEventCommand
 import nom.brunokarpo.ingressos.domain.events.domainevents.PartnerCreatedEvent
-import nom.brunokarpo.ingressos.domain.events.factories.EventFactory
 import java.util.UUID
 
 class Partner(
@@ -23,7 +22,7 @@ class Partner(
 	}
 
 	fun createEvent(createEventCommand: CreateEventCommand): Event {
-		val event = EventFactory.create(createEventCommand, this.id)
+		val event = Event.create(createEventCommand, this.id)
 		return event
 	}
 }
