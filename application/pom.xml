@@ -21,6 +21,7 @@
         <dependency>
             <groupId>nom.brunokarpo.ingressos</groupId>
             <artifactId>domain</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
