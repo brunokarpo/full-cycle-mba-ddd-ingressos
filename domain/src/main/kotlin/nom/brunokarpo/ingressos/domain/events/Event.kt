@@ -13,5 +13,6 @@ interface Event : Aggregate {
 	val sections: Set<SectionValue>
 
 	fun addSection(sectionName: String, numberOfSpots: Int)
+	fun addSection(sectionValue: SectionValue)
 	fun getNumberOfSpotsInSection(sectionName: String): Int
 }

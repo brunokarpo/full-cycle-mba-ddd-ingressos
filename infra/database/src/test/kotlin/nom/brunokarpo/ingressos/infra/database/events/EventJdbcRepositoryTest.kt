@@ -4,8 +4,10 @@ import nom.brunokarpo.ingressos.domain.events.Event
 import nom.brunokarpo.ingressos.domain.events.factories.EventFactory
 import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
 import nom.brunokarpo.ingressos.infra.database.DatabaseConfigurationTest
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.api.assertNotNull
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.context.jdbc.SqlGroup
@@ -44,6 +46,29 @@ class EventJdbcRepositoryTest: DatabaseConfigurationTest() {
 
 		assertDoesNotThrow {
 			eventRepository.save(event)
+		}
+	}
+
+	@Test
+	@SqlGroup(
+		Sql(scripts = ["/load-events.sql"], executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
+		Sql(scripts = ["/clean-database.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+	)
+	fun `should load event by id`() {
+		val eventId = UUID.fromString("abee89f7-ee9e-48c1-8796-76c084532d8e")
+
+		val event = eventRepository.ofId(eventId)
+
+		event.apply {
+			assertNotNull(this)
+			assertEquals(eventId, id)
+			assertEquals("Test event", name)
+			assertEquals("Test event description", description)
+			assertEquals(ZonedDateTime.parse("2021-01-01T03:00Z[UTC]"), date)
+			assertEquals(UUID.fromString("8c4fc406-3e25-4ccd-af77-29ad47ae5e47"), partnerId)
+			assertEquals(1, sections.size)
+			assertEquals("section name", sections.first().name)
+			assertEquals(3, sections.first().spots.size)
 		}
 	}
 

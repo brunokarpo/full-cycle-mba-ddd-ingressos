@@ -22,6 +22,14 @@ internal class SectionImpl(
 		}
 	}
 
+	override fun addSpots(spotsValue: Set<SpotValue>) {
+		spotsValue.forEach { spotValue ->
+			mutableSpots.add(
+				spotValue.asEntity()
+			)
+		}
+	}
+
 	override fun getNumberOfSpots(): Int {
 		return mutableSpots.size
 	}

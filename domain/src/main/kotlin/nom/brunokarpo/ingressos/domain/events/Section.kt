@@ -8,5 +8,6 @@ interface Section : Entity {
 	val spots: Set<SpotValue>
 
 	fun addSpots(numberOfSpots: Int)
+	fun addSpots(spotsValue: Set<SpotValue>)
 	fun getNumberOfSpots(): Int
 }

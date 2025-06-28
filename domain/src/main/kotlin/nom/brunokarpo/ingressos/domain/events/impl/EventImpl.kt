@@ -28,6 +28,12 @@ internal class EventImpl(
 		mutableSections.add(section)
 	}
 
+	override fun addSection(sectionValue: SectionValue) {
+		val section = sectionValue.asEntity()
+		section.addSpots(sectionValue.spots)
+		mutableSections.add(section)
+	}
+
 	override fun getNumberOfSpotsInSection(sectionName: String): Int {
 		return mutableSections.first { section -> section.name == sectionName }.getNumberOfSpots()
 	}

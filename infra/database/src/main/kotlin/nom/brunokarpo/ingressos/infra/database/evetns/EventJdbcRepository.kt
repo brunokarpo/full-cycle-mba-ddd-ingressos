@@ -1,6 +1,7 @@
 package nom.brunokarpo.ingressos.infra.database.evetns
 
 import nom.brunokarpo.ingressos.domain.events.Event
+import nom.brunokarpo.ingressos.domain.events.factories.EventFactory
 import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
 import nom.brunokarpo.ingressos.domain.events.values.SectionValue
 import nom.brunokarpo.ingressos.domain.events.values.SpotValue
@@ -76,6 +77,56 @@ class EventJdbcRepository(
 	}
 
 	override fun ofId(id: UUID): Event? {
-		TODO("Not yet implemented")
+		return loadEvent(id)?.let { event ->
+			loadSections(event.id).let { sections ->
+				sections.forEach { section -> event.addSection(section) }
+			}
+			event
+		}
+	}
+
+	private fun loadEvent(eventId: UUID): Event? {
+		val sql = """
+			SELECT id, name, description, date, partner_id FROM events WHERE id = :id
+		""".trimIndent()
+		val params = mapOf("id" to eventId)
+		return jdbcTemplate.query(sql, params) { rs, _ ->
+			EventFactory.create(
+				id = rs.getString("id").let { UUID.fromString(it) },
+				name = rs.getString("name"),
+				description = rs.getString("description"),
+				date = rs.getTimestamp("date").toInstant().atZone(java.time.ZoneId.of("UTC")),
+				partnerId = rs.getObject("partner_id", UUID::class.java)
+			)
+		}.first()
+	}
+
+	private fun loadSections(eventId: UUID): Set<SectionValue> {
+		val sql = """
+			SELECT id, name, event_id FROM sections s
+			WHERE event_id = :eventId
+		""".trimIndent()
+		val params = mapOf("eventId" to eventId)
+		return jdbcTemplate.query(sql, params) { rs, _ ->
+			SectionValue(
+				id = rs.getString("id").let { UUID.fromString(it) },
+				name = rs.getString("name"),
+				spots = loadSpot(rs.getString("id").let { UUID.fromString(it) })
+			)
+		}.toSet()
+	}
+
+	private fun loadSpot(sectionId: UUID): Set<SpotValue> {
+		val sql = """
+			SELECT id, location, section_id FROM spots s
+			WHERE section_id = :sectionId
+		""".trimIndent()
+		val params = mapOf("sectionId" to sectionId)
+		return jdbcTemplate.query(sql, params) { rs, _ ->
+			SpotValue(
+				id = rs.getString("id").let { UUID.fromString(it) },
+				location = rs.getString("location")
+			)
+		}.toSet()
 	}
 }
