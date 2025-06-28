@@ -3,7 +3,7 @@ package nom.brunokarpo.ingressos.domain.events
 import nom.brunokarpo.ingressos.domain.common.AggregateRoot
 import nom.brunokarpo.ingressos.domain.common.valueobjects.Cnpj
 import nom.brunokarpo.ingressos.domain.events.commands.CreateEventCommand
-import nom.brunokarpo.ingressos.domain.events.domainevents.PartnerCreatedEvent
+import nom.brunokarpo.ingressos.domain.events.domainevents.PartnerCreated
 import java.util.UUID
 
 class Partner(
@@ -15,7 +15,7 @@ class Partner(
 	companion object {
 		fun create(id: UUID = UUID.randomUUID(), name: String, cnpj: String): Partner {
 			val partnerImpl = Partner(id, name, Cnpj(cnpj))
-			val event = PartnerCreatedEvent(partnerImpl)
+			val event = PartnerCreated(partnerImpl)
 			partnerImpl.recordEvent(event)
 			return partnerImpl
 		}

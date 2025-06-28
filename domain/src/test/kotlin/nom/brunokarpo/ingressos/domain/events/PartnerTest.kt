@@ -1,7 +1,7 @@
 package nom.brunokarpo.ingressos.domain.events
 
 import nom.brunokarpo.ingressos.domain.events.commands.CreateEventCommand
-import nom.brunokarpo.ingressos.domain.events.domainevents.PartnerCreatedEvent
+import nom.brunokarpo.ingressos.domain.events.domainevents.PartnerCreated
 import nom.brunokarpo.ingressos.domain.fixtures.PartnerFixture
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -41,7 +41,7 @@ class PartnerTest {
 
 		val event = partner.events.first()
 
-		(event as PartnerCreatedEvent).apply {
+		(event as PartnerCreated).apply {
 			assertNotNull(this)
 			assertEquals(partner.id, event.aggregateId)
 			assertEquals(partnerName, event.name)
