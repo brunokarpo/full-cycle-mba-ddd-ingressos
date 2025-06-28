@@ -14,10 +14,10 @@ class Partner(
 
 	companion object {
 		fun create(id: UUID = UUID.randomUUID(), name: String, cnpj: String): Partner {
-			val partnerImpl = Partner(id, name, Cnpj(cnpj))
-			val event = PartnerCreated(partnerImpl)
-			partnerImpl.recordEvent(event)
-			return partnerImpl
+			val partner = Partner(id, name, Cnpj(cnpj))
+			val event = PartnerCreated(partner)
+			partner.recordEvent(event)
+			return partner
 		}
 	}
 
