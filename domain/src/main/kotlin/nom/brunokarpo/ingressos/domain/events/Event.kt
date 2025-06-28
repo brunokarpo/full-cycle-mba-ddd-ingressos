@@ -11,6 +11,5 @@ interface Event : Aggregate {
 	val partnerId: UUID
 
 	fun addSection(sectionName: String, numberOfSpots: Int)
-	fun getSections(): Set<Section>
 	fun getNumberOfSpotsInSection(sectionName: String): Int
 }

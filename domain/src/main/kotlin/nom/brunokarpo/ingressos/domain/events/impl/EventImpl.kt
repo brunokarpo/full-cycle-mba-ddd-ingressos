@@ -22,10 +22,6 @@ internal class EventImpl(
 		sections.add(section)
 	}
 
-	override fun getSections(): Set<Section> {
-		return sections.toSet()
-	}
-
 	override fun getNumberOfSpotsInSection(sectionName: String): Int {
 		return sections.first { section -> section.name == sectionName }.getNumberOfSpots()
 	}
