@@ -1,0 +1,28 @@
+package nom.brunokarpo.ingressos.infra.app.configurations
+
+import nom.brunokarpo.ingressos.application.events.AddSectionInEventUseCase
+import nom.brunokarpo.ingressos.application.events.CreateNewEventUseCase
+import nom.brunokarpo.ingressos.application.events.CreatePartnerUseCase
+import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
+import nom.brunokarpo.ingressos.domain.events.repository.PartnerRepository
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+
+@Configuration
+class ApplicationConfiguration {
+
+	@Bean
+	fun createPartnerUseCase(
+		partnerRepository: PartnerRepository
+	) = CreatePartnerUseCase(partnerRepository)
+
+	@Bean
+	fun createNewEventUseCase(
+		partnerRepository: PartnerRepository
+	) = CreateNewEventUseCase(partnerRepository)
+
+	@Bean
+	fun addSectionInEventUseCase(
+		eventRepository: EventRepository
+	) = AddSectionInEventUseCase(eventRepository)
+}

@@ -6,6 +6,7 @@ import nom.brunokarpo.ingressos.application.events.CreateNewEventUseCase
 import nom.brunokarpo.ingressos.application.events.CreatePartnerUseCase
 import nom.brunokarpo.ingressos.infra.api.PartnersRouter
 import nom.brunokarpo.ingressos.infra.api.dto.CreateEventDto
+import nom.brunokarpo.ingressos.infra.api.dto.CreatePartnerDto
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 import java.net.URI
@@ -17,7 +18,7 @@ class PartnersController(
 	private val createNewEventUseCase: CreateNewEventUseCase
 ) : PartnersRouter {
 
-	override fun createPartner(partnerDTO: PartnerDTO): ResponseEntity<PartnerDTO> {
+	override fun createPartner(partnerDTO: CreatePartnerDto): ResponseEntity<PartnerDTO> {
 		val partner = createPartnerUseCase.createPartner(partnerDTO.name, partnerDTO.cnpj)
 		return ResponseEntity.created(
 			URI.create("/api/v1/partners/${partner.id}")
