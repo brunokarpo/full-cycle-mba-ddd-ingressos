@@ -1,7 +1,9 @@
 package nom.brunokarpo.ingressos.domain.events
 
 import nom.brunokarpo.ingressos.domain.common.Entity
+import java.util.UUID
 
-interface Spot : Entity {
+internal class Spot(
+	override val id: UUID,
 	val location: String
-}
+) : Entity

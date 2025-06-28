@@ -1,7 +1,6 @@
 package nom.brunokarpo.ingressos.infra.database.evetns
 
 import nom.brunokarpo.ingressos.domain.events.Partner
-import nom.brunokarpo.ingressos.domain.events.factories.PartnerFactory
 import nom.brunokarpo.ingressos.domain.events.repository.PartnerRepository
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
@@ -34,7 +33,7 @@ class PartnerJdbcRepository(
 			val name = rs.getString("name")
 			val cpnj = rs.getString("cnpj")
 
-			return@query PartnerFactory.create(
+			return@query Partner.create(
 				id = id,
 				name = name,
 				cnpj = cpnj

@@ -9,15 +9,15 @@ class SectionValue(
 	val id: UUID,
 	val name: String,
 	val spots: Set<SpotValue>
-) : EntityAsValue<Section> {
+) : EntityAsValue() {
 
-	constructor(section: Section): this(
+	internal constructor(section: Section): this(
 		id = section.id,
 		name = section.name,
 		spots = section.spots
 	)
 
-	override fun asEntity(): Section {
+	internal fun asEntity(): Section {
 		return SectionFactory.create(
 			id = id,
 			name = name

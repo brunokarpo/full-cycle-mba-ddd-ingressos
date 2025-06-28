@@ -1,6 +1,7 @@
 package nom.brunokarpo.ingressos.domain.events
 
 import nom.brunokarpo.ingressos.domain.events.commands.CreateEventCommand
+import nom.brunokarpo.ingressos.domain.events.domainevents.PartnerCreatedEvent
 import nom.brunokarpo.ingressos.domain.fixtures.PartnerFixture
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -30,5 +31,23 @@ class PartnerTest {
 		assertEquals(date, event.date)
 		assertNotNull(event.id)
 		assertEquals(partner.id, event.partnerId)
+	}
+
+	@Test
+	fun `should create a partner and register partner created event`() {
+		val partnerName = "Test"
+		val partnerCnpj = "00000000000000"
+		val partner: Partner = Partner.create(name = partnerName, cnpj = partnerCnpj)
+
+		val event = partner.events.first()
+
+		(event as PartnerCreatedEvent).apply {
+			assertNotNull(this)
+			assertEquals(partner.id, event.aggregateId)
+			assertEquals(partnerName, event.name)
+			assertEquals(partnerCnpj, event.cnpj)
+			assertEquals(1, event.version)
+			assertEquals(ZonedDateTime.now(), event.occurredOn)
+		}
 	}
 }

@@ -1,9 +1,9 @@
 package nom.brunokarpo.ingressos.domain.common
 
-internal abstract class AggregateRoot : Entity {
-	val events: MutableSet<DomainEvent> = mutableSetOf()
+abstract class AggregateRoot : Entity {
+	val events: MutableList<DomainEvent> = mutableListOf()
 
-	protected fun recordEvent(event: DomainEvent) {
+	fun recordEvent(event: DomainEvent) {
 		this.events.add(event)
 	}
 

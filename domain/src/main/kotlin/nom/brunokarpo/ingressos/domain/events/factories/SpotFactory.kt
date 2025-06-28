@@ -1,7 +1,6 @@
 package nom.brunokarpo.ingressos.domain.events.factories
 
 import nom.brunokarpo.ingressos.domain.events.Spot
-import nom.brunokarpo.ingressos.domain.events.impl.SpotImpl
 import java.util.UUID
 
 internal object SpotFactory {
@@ -10,7 +9,7 @@ internal object SpotFactory {
 		id: UUID = UUID.randomUUID(),
 		locationName: String
 	): Spot {
-		return SpotImpl(
+		return Spot(
 			id = id,
 			location = locationName
 		)

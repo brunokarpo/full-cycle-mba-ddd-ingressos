@@ -8,8 +8,8 @@ import java.util.UUID
 class SpotValue (
 	val id: UUID,
 	val location: String
-): EntityAsValue<Spot> {
-	override fun asEntity(): Spot {
+): EntityAsValue() {
+	internal fun asEntity(): Spot {
 		return SpotFactory.create(
 			id = id,
 			locationName = location

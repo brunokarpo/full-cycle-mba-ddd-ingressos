@@ -4,7 +4,7 @@ import nom.brunokarpo.ingressos.domain.common.DomainEvent
 import nom.brunokarpo.ingressos.domain.events.Partner
 import java.time.ZonedDateTime
 
-class PartnerCreated(
+class PartnerCreatedEvent(
 	partner: Partner
 ) : DomainEvent {
 

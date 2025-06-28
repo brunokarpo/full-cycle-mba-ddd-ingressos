@@ -5,7 +5,7 @@ import nom.brunokarpo.ingressos.domain.events.factories.SectionFactory
 
 object SectionFixture {
 
-	fun create(): Section {
+	internal fun create(): Section {
 		return SectionFactory
 			.create(
 				name = "Section Name"
