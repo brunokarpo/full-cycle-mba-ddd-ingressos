@@ -7,12 +7,15 @@ import java.util.UUID
 
 class SectionValue(
 	val id: UUID,
-	val name: String
+	val name: String,
+	val spots: Set<SpotValue>
 ) : EntityAsValue<Section> {
 
 	constructor(section: Section): this(
 		id = section.id,
-		name = section.name)
+		name = section.name,
+		spots = section.spots
+	)
 
 	override fun asEntity(): Section {
 		return SectionFactory.create(

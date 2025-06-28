@@ -18,7 +18,7 @@ object EventFactory {
 		)
 	}
 
-	internal fun create(
+	fun create(
 		id: UUID = UUID.randomUUID(),
 		name: String,
 		description: String,
