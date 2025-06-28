@@ -21,8 +21,8 @@ class CreateNewEventUseCaseTest {
 
 	private companion object {
 		val EVENT_ID: UUID = UUID.randomUUID()
-		val EVENT_NAME: String = "eventName"
-		val EVENT_DESCRIPTION: String = "eventDescription"
+		const val EVENT_NAME: String = "eventName"
+		const val EVENT_DESCRIPTION: String = "eventDescription"
 		val EVENT_DATE: ZonedDateTime = ZonedDateTime.now()
 		val PARTNER_ID: UUID = UUID.randomUUID()
 	}

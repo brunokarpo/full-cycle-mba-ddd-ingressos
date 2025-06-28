@@ -11,7 +11,7 @@ class CreatePartnerUseCase(
 ) : UseCase<Partner> {
 
 	fun createPartner(name: String, cnpj: String): PartnerDTO {
-		val partner = PartnerFactory.create(name, cnpj)
+		val partner = PartnerFactory.create(name = name, cnpj = cnpj)
 
 		partnerRepository.save(partner)
 

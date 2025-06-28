@@ -16,11 +16,11 @@ class CreateNewEventUseCase(
 
 		val partner = partnerRepository.ofId(partnerId) ?: throw PartnerDoesNotExistsException(partnerId)
 
-		val createEventCommand = CreateEventCommand(
-			name = eventName,
-			description = eventDescription,
-			date = eventDate,
-		)
+		val createEventCommand = CreateEventCommand.builder()
+			.withName(eventName)
+			.withDescription(eventDescription)
+			.withDate(eventDate)
+			.build()
 
 		val event = partner.createEvent(
 			createEventCommand
