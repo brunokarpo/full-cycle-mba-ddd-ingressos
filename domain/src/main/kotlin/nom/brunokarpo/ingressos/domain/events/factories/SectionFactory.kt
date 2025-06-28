@@ -8,8 +8,7 @@ internal object SectionFactory {
 
 	fun create(
 		id: UUID = UUID.randomUUID(),
-		name: String,
-		numberOfSpots: Int
+		name: String
 	): Section {
 		return SectionImpl(
 			id = id,

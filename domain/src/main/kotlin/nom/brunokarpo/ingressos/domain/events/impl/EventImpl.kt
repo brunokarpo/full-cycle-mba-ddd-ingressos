@@ -17,7 +17,7 @@ internal class EventImpl(
 	private val sections = mutableListOf<Section>()
 
 	override fun addSection(sectionName: String, numberOfSpots: Int) {
-		val section = SectionFactory.create(name = sectionName, numberOfSpots = numberOfSpots)
+		val section = SectionFactory.create(name = sectionName)
 		sections.add(section)
 	}
 
