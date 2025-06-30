@@ -16,10 +16,9 @@ services:
 
   flyway:
     image: flyway/flyway:11.8.1-alpine
-    command: ["-configFiles=/flyway/conf/flyway.conf", "migrate"]
+    command: ["-url=jdbc:postgresql://database:5432/ingressos-db", "-user=ingressos-app", "-password=ingressos-app", "-schemas=public", "-postgresql.transactional.lock=false",  "migrate"]
     volumes:
       - ./scripts/db/migrations:/flyway/sql
-      - ./scripts/db/conf:/flyway/conf
     depends_on:
       database:
         condition: service_healthy
