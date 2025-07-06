@@ -2,7 +2,6 @@ package nom.brunokarpo.ingressos.application.usecases
 
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.slot
 import io.mockk.spyk
 import io.mockk.verify
 import nom.brunokarpo.ingressos.application.dto.EventDTO
@@ -14,7 +13,6 @@ import nom.brunokarpo.ingressos.domain.events.domainevents.EventCreated
 import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
 import nom.brunokarpo.ingressos.domain.events.repository.PartnerRepository
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -105,17 +103,6 @@ class CreateNewEventUseCaseTest {
 
 		sut.execute(PARTNER_ID, EVENT_NAME, EVENT_DESCRIPTION, EVENT_DATE)
 
-		val slot = slot<EventCreated>()
-
-		verify(exactly = 1) { aggregateRootPublisher.handleEvent(capture(slot)) }
-
-		val captured = slot.captured
-		assertNotNull(captured)
-		assertEquals(EVENT_ID, captured.aggregateId)
-		assertEquals(EVENT_NAME, captured.name)
-		assertEquals(EVENT_DESCRIPTION, captured.description)
-		assertEquals(EVENT_DATE, captured.date)
-		assertEquals(PARTNER_ID, captured.partnerId)
-		assertEquals(1L, captured.version)
+		verify(exactly = 1) { aggregateRootPublisher.publish(event) }
 	}
 }

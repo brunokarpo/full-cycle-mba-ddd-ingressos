@@ -60,17 +60,14 @@ class CreatePartnerUseCaseTest {
 
 		sut.createPartner(name, cnpj)
 
-		val slot = slot<PartnerCreated>()
-		verify(exactly = 1) { aggregateRootPublisher.handleEvent(capture(slot)) }
+		val slot = slot<Partner>()
+		verify(exactly = 1) { aggregateRootPublisher.publish(capture(slot)) }
 
 		val captured = slot.captured
 		assertNotNull(captured)
-		assertNotNull(captured.aggregateId)
+		assertNotNull(captured.id)
 		assertEquals(name, captured.name)
-		assertEquals(cnpj, captured.cnpj)
-		assertEquals(1L, captured.version)
-		assertNotNull(captured.occurredOn)
-		assertEquals(PartnerCreated::class.java, captured::class.java)
-
+		assertEquals(cnpj, captured.cnpj.value)
+		assertEquals(1, captured.events.size)
 	}
 }
