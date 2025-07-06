@@ -21,11 +21,13 @@ class ApplicationConfiguration {
 	@Bean
 	fun createNewEventUseCase(
 		partnerRepository: PartnerRepository,
-		eventRepository: EventRepository
-	) = CreateNewEventUseCase(partnerRepository, eventRepository)
+		eventRepository: EventRepository,
+		aggregateRootPublisher: AggregateRootPublisher
+	) = CreateNewEventUseCase(partnerRepository, eventRepository, aggregateRootPublisher)
 
 	@Bean
 	fun addSectionInEventUseCase(
-		eventRepository: EventRepository
-	) = AddSectionInEventUseCase(eventRepository)
+		eventRepository: EventRepository,
+		aggregateRootPublisher: AggregateRootPublisher
+	) = AddSectionInEventUseCase(eventRepository, aggregateRootPublisher)
 }
