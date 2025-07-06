@@ -93,7 +93,7 @@ class EventJdbcRepository(
 		""".trimIndent()
 		val params = mapOf("id" to eventId)
 		return jdbcTemplate.query(sql, params) { rs, _ ->
-			Event.create(
+			Event(
 				id = rs.getString("id").let { UUID.fromString(it) },
 				name = rs.getString("name"),
 				description = rs.getString("description"),

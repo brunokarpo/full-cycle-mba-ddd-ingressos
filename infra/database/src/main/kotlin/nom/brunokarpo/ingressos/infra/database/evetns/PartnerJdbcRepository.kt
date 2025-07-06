@@ -1,5 +1,6 @@
 package nom.brunokarpo.ingressos.infra.database.evetns
 
+import nom.brunokarpo.ingressos.domain.common.valueobjects.Cnpj
 import nom.brunokarpo.ingressos.domain.events.Partner
 import nom.brunokarpo.ingressos.domain.events.repository.PartnerRepository
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
@@ -30,13 +31,14 @@ class PartnerJdbcRepository(
 		""".trimIndent()
 		val params = mapOf("id" to id)
 		return jdbcTemplate.query(sql, params) { rs, _ ->
+			val uuid = rs.getString("id").let { UUID.fromString(it) }
 			val name = rs.getString("name")
 			val cpnj = rs.getString("cnpj")
 
-			return@query Partner.create(
-				id = id,
+			Partner(
+				id = uuid,
 				name = name,
-				cnpj = cpnj
+				cnpj = Cnpj(cpnj)
 			)
 		}.firstOrNull()
 	}
