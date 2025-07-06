@@ -5,7 +5,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import nom.brunokarpo.ingressos.application.usecases.exceptions.EventDoesNotExistException
-import nom.brunokarpo.ingressos.domain.common.valueobjects.AggregateRootPublisher
+import nom.brunokarpo.ingressos.domain.common.AggregateRootPublisher
 import nom.brunokarpo.ingressos.domain.events.Event
 import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
 import org.junit.jupiter.api.Assertions.assertEquals

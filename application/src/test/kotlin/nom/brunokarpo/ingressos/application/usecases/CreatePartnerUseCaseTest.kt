@@ -5,7 +5,7 @@ import io.mockk.slot
 import io.mockk.spyk
 import io.mockk.verify
 import nom.brunokarpo.ingressos.domain.common.DomainEvent
-import nom.brunokarpo.ingressos.domain.common.valueobjects.AggregateRootPublisher
+import nom.brunokarpo.ingressos.domain.common.AggregateRootPublisher
 import nom.brunokarpo.ingressos.domain.events.Partner
 import nom.brunokarpo.ingressos.domain.events.domainevents.PartnerCreated
 import nom.brunokarpo.ingressos.domain.events.repository.PartnerRepository

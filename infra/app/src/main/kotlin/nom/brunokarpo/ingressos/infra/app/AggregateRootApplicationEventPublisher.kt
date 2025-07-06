@@ -1,7 +1,7 @@
 package nom.brunokarpo.ingressos.infra.app
 
 import nom.brunokarpo.ingressos.domain.common.DomainEvent
-import nom.brunokarpo.ingressos.domain.common.valueobjects.AggregateRootPublisher
+import nom.brunokarpo.ingressos.domain.common.AggregateRootPublisher
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Component
 

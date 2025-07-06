@@ -1,7 +1,7 @@
 package nom.brunokarpo.ingressos.application.usecases
 
 import nom.brunokarpo.ingressos.application.dto.PartnerDTO
-import nom.brunokarpo.ingressos.domain.common.valueobjects.AggregateRootPublisher
+import nom.brunokarpo.ingressos.domain.common.AggregateRootPublisher
 import nom.brunokarpo.ingressos.domain.events.Partner
 import nom.brunokarpo.ingressos.domain.events.repository.PartnerRepository
 

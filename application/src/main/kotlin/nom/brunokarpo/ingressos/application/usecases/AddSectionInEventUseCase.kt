@@ -1,7 +1,7 @@
 package nom.brunokarpo.ingressos.application.usecases
 
 import nom.brunokarpo.ingressos.application.usecases.exceptions.EventDoesNotExistException
-import nom.brunokarpo.ingressos.domain.common.valueobjects.AggregateRootPublisher
+import nom.brunokarpo.ingressos.domain.common.AggregateRootPublisher
 import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
 import java.util.UUID
 

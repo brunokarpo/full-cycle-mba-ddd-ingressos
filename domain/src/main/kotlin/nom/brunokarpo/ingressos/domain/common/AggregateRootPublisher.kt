@@ -1,7 +1,4 @@
-package nom.brunokarpo.ingressos.domain.common.valueobjects
-
-import nom.brunokarpo.ingressos.domain.common.AggregateRoot
-import nom.brunokarpo.ingressos.domain.common.DomainEvent
+package nom.brunokarpo.ingressos.domain.common
 
 fun interface AggregateRootPublisher {
 

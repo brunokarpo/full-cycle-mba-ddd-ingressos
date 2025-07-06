@@ -6,7 +6,7 @@ import io.mockk.spyk
 import io.mockk.verify
 import nom.brunokarpo.ingressos.application.dto.EventDTO
 import nom.brunokarpo.ingressos.application.usecases.exceptions.PartnerDoesNotExistsException
-import nom.brunokarpo.ingressos.domain.common.valueobjects.AggregateRootPublisher
+import nom.brunokarpo.ingressos.domain.common.AggregateRootPublisher
 import nom.brunokarpo.ingressos.domain.events.Event
 import nom.brunokarpo.ingressos.domain.events.Partner
 import nom.brunokarpo.ingressos.domain.events.domainevents.EventCreated
