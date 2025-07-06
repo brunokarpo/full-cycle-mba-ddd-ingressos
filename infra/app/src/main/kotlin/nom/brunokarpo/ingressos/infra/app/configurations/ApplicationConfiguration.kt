@@ -1,5 +1,6 @@
 package nom.brunokarpo.ingressos.infra.app.configurations
 
+import nom.brunokarpo.ingressos.application.listeners.PartnerCreatedListener
 import nom.brunokarpo.ingressos.application.usecases.AddSectionInEventUseCase
 import nom.brunokarpo.ingressos.application.usecases.CreateNewEventUseCase
 import nom.brunokarpo.ingressos.application.usecases.CreatePartnerUseCase
@@ -30,4 +31,7 @@ class ApplicationConfiguration {
 		eventRepository: EventRepository,
 		aggregateRootPublisher: AggregateRootPublisher
 	) = AddSectionInEventUseCase(eventRepository, aggregateRootPublisher)
+
+	@Bean
+	fun partnerCreatedListener(): PartnerCreatedListener = PartnerCreatedListener()
 }

@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "name": "Partner test",
-  "cnpj": "00000"
+  "cnpj": "00002"
 }
 
 ###
