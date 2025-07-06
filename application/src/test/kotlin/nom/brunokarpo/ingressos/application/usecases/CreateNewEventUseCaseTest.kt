@@ -2,14 +2,19 @@ package nom.brunokarpo.ingressos.application.usecases
 
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.slot
+import io.mockk.spyk
 import io.mockk.verify
 import nom.brunokarpo.ingressos.application.dto.EventDTO
 import nom.brunokarpo.ingressos.application.usecases.exceptions.PartnerDoesNotExistsException
+import nom.brunokarpo.ingressos.domain.common.valueobjects.AggregateRootPublisher
 import nom.brunokarpo.ingressos.domain.events.Event
 import nom.brunokarpo.ingressos.domain.events.Partner
+import nom.brunokarpo.ingressos.domain.events.domainevents.EventCreated
 import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
 import nom.brunokarpo.ingressos.domain.events.repository.PartnerRepository
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -30,6 +35,7 @@ class CreateNewEventUseCaseTest {
 
 	private lateinit var partnerRepository: PartnerRepository
 	private lateinit var eventRepository: EventRepository
+	private lateinit var aggregateRootPublisher: AggregateRootPublisher
 
 	private lateinit var sut: CreateNewEventUseCase
 	private lateinit var partner: Partner
@@ -42,7 +48,6 @@ class CreateNewEventUseCaseTest {
 			every { description } returns EVENT_DESCRIPTION
 			every { date } returns EVENT_DATE
 			every { partnerId } returns PARTNER_ID
-
 		}
 		partner = mockk(relaxed = true) {
 			every { createEvent(any()) } returns event
@@ -50,9 +55,11 @@ class CreateNewEventUseCaseTest {
 		partnerRepository = mockk(relaxed = true) {
 			every { ofId(any()) } returns partner
 		}
-		eventRepository = mockk(relaxed = true) {}
+		eventRepository = mockk(relaxed = true)
 
-		sut = CreateNewEventUseCase(partnerRepository, eventRepository)
+		aggregateRootPublisher = spyk()
+
+		sut = CreateNewEventUseCase(partnerRepository, eventRepository, aggregateRootPublisher)
 	}
 
 	@Test
@@ -90,5 +97,25 @@ class CreateNewEventUseCaseTest {
 		sut.execute(PARTNER_ID, EVENT_NAME, EVENT_DESCRIPTION, EVENT_DATE)
 
 		verify { eventRepository.save(event) }
+	}
+
+	@Test
+	fun `should publish EventCreated event when event is created`() {
+		every { event.events } returns mutableListOf(EventCreated(event))
+
+		sut.execute(PARTNER_ID, EVENT_NAME, EVENT_DESCRIPTION, EVENT_DATE)
+
+		val slot = slot<EventCreated>()
+
+		verify(exactly = 1) { aggregateRootPublisher.handleEvent(capture(slot)) }
+
+		val captured = slot.captured
+		assertNotNull(captured)
+		assertEquals(EVENT_ID, captured.aggregateId)
+		assertEquals(EVENT_NAME, captured.name)
+		assertEquals(EVENT_DESCRIPTION, captured.description)
+		assertEquals(EVENT_DATE, captured.date)
+		assertEquals(PARTNER_ID, captured.partnerId)
+		assertEquals(1L, captured.version)
 	}
 }
