@@ -22,3 +22,35 @@ services:
     depends_on:
       database:
         condition: service_healthy
+
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack
+    environment:
+      - SERVICES=sqs
+      - DEBUG=1
+      - PERSISTENCE=1
+      - LOCALSTACK_HOST=localstack
+    ports:
+      - "4566:4566"
+      - "4510-4559:4510-4559"
+      - "5678:5678"
+    healthcheck:
+      test: "curl -f http://localhost:4566/_localstack/health || exit 1"
+      interval: 5s
+      timeout: 5s
+      retries: 3
+
+  aws:
+    image: organs/awscli
+    entrypoint: [ "sh", "/run/localstack.sh" ]
+    environment:
+      - AWS_ACCESS_KEY=anyAccess
+      - AWS_SECRET_ACCESS_KEY=anySecret
+      - AWS_DEFAULT_REGION=us-east-1
+      - LOCALSTACK_HOSTNAME=localstack
+    volumes:
+      - ./scripts/aws:/run
+    depends_on:
+      localstack:
+        condition: service_healthy
