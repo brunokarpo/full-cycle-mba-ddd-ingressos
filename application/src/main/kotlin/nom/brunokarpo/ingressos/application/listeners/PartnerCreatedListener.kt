@@ -2,10 +2,13 @@ package nom.brunokarpo.ingressos.application.listeners
 
 import nom.brunokarpo.ingressos.domain.common.DomainEventListener
 import nom.brunokarpo.ingressos.domain.events.domainevents.PartnerCreated
+import nom.brunokarpo.ingressos.domain.events.integrationevents.PartnerCreatedEventPublisher
 
-class PartnerCreatedListener: DomainEventListener<PartnerCreated> {
+class PartnerCreatedListener(
+	private val partnerCreatedEventPublisher: PartnerCreatedEventPublisher
+): DomainEventListener<PartnerCreated> {
 
 	override fun onEvent(event: PartnerCreated) {
-		println("O partner ${event.name} foi criado! $event")
+		partnerCreatedEventPublisher.publish(event)
 	}
 }
