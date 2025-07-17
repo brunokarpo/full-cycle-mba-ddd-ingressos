@@ -10,7 +10,7 @@ object LocalstackContainer {
 	private val LOCALSTACK_IMAGE: DockerImageName = DockerImageName.parse("localstack/localstack:4.6.0")
 
 	@Container
-	private val localStackContainer: LocalStackContainer = LocalStackContainer(LOCALSTACK_IMAGE)
+	val localStackContainer: LocalStackContainer = LocalStackContainer(LOCALSTACK_IMAGE)
 		.withServices(LocalStackContainer.Service.SQS)
 		.withEnv("LOCALSTACK_HOST", "localhost")
 		.withExposedPorts(4566)
@@ -31,10 +31,9 @@ object LocalstackContainer {
 	val environment: Map<String, String>
 		get() {
 			return mapOf(
-				"spring.cloud.aws.credentials.access-key" to localStackContainer.accessKey,
-				"spring.cloud.aws.credentials.secret-key" to localStackContainer.secretKey,
-				"spring.cloud.aws.region.static" to localStackContainer.region,
-				"spring.cloud.aws.endpoint" to localStackContainer.getEndpointOverride(LocalStackContainer.Service.SQS).toString()
+				"AWS_ACCESS_KEY_ID" to localStackContainer.accessKey,
+				"AWS_SECRET_ACCESS_KEY" to localStackContainer.secretKey,
+				"AWS_REGION" to localStackContainer.region
 			)
 		}
 }
