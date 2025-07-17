@@ -31,9 +31,12 @@ object LocalstackContainer {
 	val environment: Map<String, String>
 		get() {
 			return mapOf(
-				"AWS_ACCESS_KEY_ID" to localStackContainer.accessKey,
-				"AWS_SECRET_ACCESS_KEY" to localStackContainer.secretKey,
-				"AWS_REGION" to localStackContainer.region
+				"spring.cloud.aws.credentials.access-key" to localStackContainer.accessKey,
+				"spring.cloud.aws.credentials.secret-key" to localStackContainer.secretKey,
+				"spring.cloud.aws.credentials.profile.name" to "test",
+				"spring.cloud.aws.region.static" to localStackContainer.region,
+				"spring.cloud.aws.sqs.endpoint" to localStackContainer.getEndpointOverride(LocalStackContainer.Service.SQS).toString(),
+				"logging.level.io.awspring.cloud" to "debug"
 			)
 		}
 }
