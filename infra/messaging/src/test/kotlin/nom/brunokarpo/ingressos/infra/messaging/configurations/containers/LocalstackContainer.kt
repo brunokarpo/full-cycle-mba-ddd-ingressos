@@ -20,7 +20,12 @@ object LocalstackContainer {
 	fun start() {
 		localStackContainer.apply {
 			start()
+			createQueues()
 		}
+	}
+
+	fun createQueues() {
+		localStackContainer.execInContainer("awslocal", "sqs", "create-queue", "--queue-name", "PARTNER_CREATED_QUEUE")
 	}
 
 	val environment: Map<String, String>
