@@ -31,6 +31,10 @@
             <groupId>nom.brunokarpo.ingressos.infra</groupId>
             <artifactId>database</artifactId>
         </dependency>
+        <dependency>
+            <groupId>nom.brunokarpo.ingressos</groupId>
+            <artifactId>messaging</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>nom.brunokarpo.ingressos</groupId>

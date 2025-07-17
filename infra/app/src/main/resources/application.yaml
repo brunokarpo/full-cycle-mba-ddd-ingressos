@@ -3,3 +3,11 @@ spring:
     url: jdbc:postgresql://localhost:5432/ingressos-db
     username: ingressos-app
     password: ingressos-app
+  cloud:
+    aws:
+      credentials:
+        access-key: anyAccess
+        secret-key: anySecret
+      region:
+        static: us-east-1
+      endpoint: http://localhost:4566

@@ -15,6 +15,7 @@ class MessagingConfiguration {
 	@Bean
 	fun objectMapper(): ObjectMapper {
 		val mapper = ObjectMapper()
+		mapper.findAndRegisterModules()
 		mapper.registerModule(JavaTimeModule())
 		return mapper
 	}
