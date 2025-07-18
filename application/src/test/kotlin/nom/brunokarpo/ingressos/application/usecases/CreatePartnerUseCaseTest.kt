@@ -4,21 +4,18 @@ import io.mockk.mockk
 import io.mockk.slot
 import io.mockk.spyk
 import io.mockk.verify
-import nom.brunokarpo.ingressos.domain.common.DomainEvent
-import nom.brunokarpo.ingressos.domain.common.AggregateRootPublisher
+import nom.brunokarpo.ingressos.domain.common.AggregateRootNotifier
 import nom.brunokarpo.ingressos.domain.events.Partner
-import nom.brunokarpo.ingressos.domain.events.domainevents.PartnerCreated
 import nom.brunokarpo.ingressos.domain.events.repository.PartnerRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import kotlin.jvm.java
 
 class CreatePartnerUseCaseTest {
 
 	private lateinit var partnerRepository: PartnerRepository
-	private lateinit var aggregateRootPublisher: AggregateRootPublisher
+	private lateinit var aggregateRootNotifier: AggregateRootNotifier
 
 	private lateinit var sut: CreatePartnerUseCase
 
@@ -26,9 +23,9 @@ class CreatePartnerUseCaseTest {
 	@BeforeEach
 	fun setUp() {
 		partnerRepository = mockk(relaxed = true)
-		aggregateRootPublisher = spyk()
+		aggregateRootNotifier = spyk()
 
-		sut = CreatePartnerUseCase(partnerRepository, aggregateRootPublisher)
+		sut = CreatePartnerUseCase(partnerRepository, aggregateRootNotifier)
 	}
 
 	@Test
@@ -61,7 +58,7 @@ class CreatePartnerUseCaseTest {
 		sut.createPartner(name, cnpj)
 
 		val slot = slot<Partner>()
-		verify(exactly = 1) { aggregateRootPublisher.publish(capture(slot)) }
+		verify(exactly = 1) { aggregateRootNotifier.notify(capture(slot)) }
 
 		val captured = slot.captured
 		assertNotNull(captured)

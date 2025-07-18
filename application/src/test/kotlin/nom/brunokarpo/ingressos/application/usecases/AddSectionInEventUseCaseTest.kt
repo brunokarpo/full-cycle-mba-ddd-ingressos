@@ -5,7 +5,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import nom.brunokarpo.ingressos.application.usecases.exceptions.EventDoesNotExistException
-import nom.brunokarpo.ingressos.domain.common.AggregateRootPublisher
+import nom.brunokarpo.ingressos.domain.common.AggregateRootNotifier
 import nom.brunokarpo.ingressos.domain.events.Event
 import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -17,16 +17,16 @@ import java.util.UUID
 class AddSectionInEventUseCaseTest {
 
 	private lateinit var eventRepositoryMock: EventRepository
-	private lateinit var aggregateRootPublisher: AggregateRootPublisher
+	private lateinit var aggregateRootNotifier: AggregateRootNotifier
 
 	private lateinit var sut: AddSectionInEventUseCase
 
 	@BeforeEach
 	fun setUp() {
 		eventRepositoryMock = mockk(relaxed = true)
-		aggregateRootPublisher = mockk(relaxed = true)
+		aggregateRootNotifier = mockk(relaxed = true)
 
-		sut = AddSectionInEventUseCase(eventRepositoryMock, aggregateRootPublisher)
+		sut = AddSectionInEventUseCase(eventRepositoryMock, aggregateRootNotifier)
 	}
 
 	@Test
@@ -78,7 +78,7 @@ class AddSectionInEventUseCaseTest {
 		sut.execute(eventId, sectionName, numberOfSpots)
 
 		verify(exactly = 1) {
-			aggregateRootPublisher.publish(eventMock)
+			aggregateRootNotifier.notify(eventMock)
 		}
 	}
 }

@@ -1,8 +1,8 @@
 package nom.brunokarpo.ingressos.domain.common
 
-interface AggregateRootPublisher {
+interface AggregateRootNotifier {
 
-	fun publish(aggregateRoot: AggregateRoot) {
+	fun notify(aggregateRoot: AggregateRoot) {
 		aggregateRoot.events.forEach { event -> this.handleEvent(event) }
 	}
 

@@ -1,14 +1,14 @@
 package nom.brunokarpo.ingressos.infra.app.eventhandlers
 
-import nom.brunokarpo.ingressos.domain.common.AggregateRootPublisher
+import nom.brunokarpo.ingressos.domain.common.AggregateRootNotifier
 import nom.brunokarpo.ingressos.domain.common.DomainEvent
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Component
 
 @Component
-class AggregateRootApplicationEventPublisher(
+class AggregateRootApplicationEventNotifier(
 	private val applicationEvent: ApplicationEventPublisher
-) : AggregateRootPublisher {
+) : AggregateRootNotifier {
 
 	override fun <D : DomainEvent> handleEvent(event: D) {
 		applicationEvent.publishEvent(event)

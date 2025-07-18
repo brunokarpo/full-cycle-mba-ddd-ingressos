@@ -6,7 +6,7 @@ import io.mockk.spyk
 import io.mockk.verify
 import nom.brunokarpo.ingressos.application.dto.EventDTO
 import nom.brunokarpo.ingressos.application.usecases.exceptions.PartnerDoesNotExistsException
-import nom.brunokarpo.ingressos.domain.common.AggregateRootPublisher
+import nom.brunokarpo.ingressos.domain.common.AggregateRootNotifier
 import nom.brunokarpo.ingressos.domain.events.Event
 import nom.brunokarpo.ingressos.domain.events.Partner
 import nom.brunokarpo.ingressos.domain.events.domainevents.EventCreated
@@ -33,7 +33,7 @@ class CreateNewEventUseCaseTest {
 
 	private lateinit var partnerRepository: PartnerRepository
 	private lateinit var eventRepository: EventRepository
-	private lateinit var aggregateRootPublisher: AggregateRootPublisher
+	private lateinit var aggregateRootNotifier: AggregateRootNotifier
 
 	private lateinit var sut: CreateNewEventUseCase
 	private lateinit var partner: Partner
@@ -55,9 +55,9 @@ class CreateNewEventUseCaseTest {
 		}
 		eventRepository = mockk(relaxed = true)
 
-		aggregateRootPublisher = spyk()
+		aggregateRootNotifier = spyk()
 
-		sut = CreateNewEventUseCase(partnerRepository, eventRepository, aggregateRootPublisher)
+		sut = CreateNewEventUseCase(partnerRepository, eventRepository, aggregateRootNotifier)
 	}
 
 	@Test
@@ -103,6 +103,6 @@ class CreateNewEventUseCaseTest {
 
 		sut.execute(PARTNER_ID, EVENT_NAME, EVENT_DESCRIPTION, EVENT_DATE)
 
-		verify(exactly = 1) { aggregateRootPublisher.publish(event) }
+		verify(exactly = 1) { aggregateRootNotifier.notify(event) }
 	}
 }

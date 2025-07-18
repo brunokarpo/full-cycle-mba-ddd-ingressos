@@ -4,7 +4,7 @@ import nom.brunokarpo.ingressos.application.listeners.PartnerCreatedListener
 import nom.brunokarpo.ingressos.application.usecases.AddSectionInEventUseCase
 import nom.brunokarpo.ingressos.application.usecases.CreateNewEventUseCase
 import nom.brunokarpo.ingressos.application.usecases.CreatePartnerUseCase
-import nom.brunokarpo.ingressos.domain.common.AggregateRootPublisher
+import nom.brunokarpo.ingressos.domain.common.AggregateRootNotifier
 import nom.brunokarpo.ingressos.domain.events.integrationevents.PartnerCreatedEventPublisher
 import nom.brunokarpo.ingressos.domain.events.repository.EventRepository
 import nom.brunokarpo.ingressos.domain.events.repository.PartnerRepository
@@ -17,21 +17,21 @@ class ApplicationConfiguration {
 	@Bean
 	fun createPartnerUseCase(
 		partnerRepository: PartnerRepository,
-		aggregateRootPublisher: AggregateRootPublisher
-	) = CreatePartnerUseCase(partnerRepository, aggregateRootPublisher)
+		aggregateRootNotifier: AggregateRootNotifier
+	) = CreatePartnerUseCase(partnerRepository, aggregateRootNotifier)
 
 	@Bean
 	fun createNewEventUseCase(
 		partnerRepository: PartnerRepository,
 		eventRepository: EventRepository,
-		aggregateRootPublisher: AggregateRootPublisher
-	) = CreateNewEventUseCase(partnerRepository, eventRepository, aggregateRootPublisher)
+		aggregateRootNotifier: AggregateRootNotifier
+	) = CreateNewEventUseCase(partnerRepository, eventRepository, aggregateRootNotifier)
 
 	@Bean
 	fun addSectionInEventUseCase(
 		eventRepository: EventRepository,
-		aggregateRootPublisher: AggregateRootPublisher
-	) = AddSectionInEventUseCase(eventRepository, aggregateRootPublisher)
+		aggregateRootNotifier: AggregateRootNotifier
+	) = AddSectionInEventUseCase(eventRepository, aggregateRootNotifier)
 
 	@Bean
 	fun partnerCreatedListener(
